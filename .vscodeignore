@@ -1,0 +1,8 @@
+.vscode/**
+.git/**
+test/**
+docs/**
+examples/**
+*.zip
+*.vsix
+.DS_Store

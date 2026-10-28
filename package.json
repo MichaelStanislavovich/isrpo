@@ -1,0 +1,87 @@
+{
+  "name": "todo-navigator",
+  "displayName": "TODO Navigator",
+  "description": "Навигатор TODO и FIXME в комментариях C++, JavaScript и TypeScript",
+  "version": "0.2.0",
+  "publisher": "m3108-lab",
+  "private": true,
+  "engines": {
+    "vscode": "^1.90.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "main": "./src/extension.js",
+  "activationEvents": [
+    "onView:todoNavigator.tasks"
+  ],
+  "contributes": {
+    "viewsContainers": {
+      "activitybar": [ 
+        {
+          "id": "todoNavigator",
+          "title": "TODO Navigator",
+          "icon": "resources/todo.svg"
+        }
+      ]
+    },
+    "views": {
+      "todoNavigator": [
+        {
+          "id": "todoNavigator.tasks",
+          "name": "Задачи в комментариях"
+        }
+      ]
+    },
+    "commands": [
+      {
+        "command": "todoNavigator.refresh",
+        "title": "TODO Navigator: Обновить список",
+        "icon": "$(refresh)"
+      },
+      {
+        "command": "todoNavigator.filterType",
+        "title": "TODO Navigator: Фильтр по типу",
+        "icon": "$(filter)"
+      },
+      {
+        "command": "todoNavigator.filterPriority",
+        "title": "TODO Navigator: Фильтр по приоритету",
+        "icon": "$(list-filter)"
+      },
+      {
+        "command": "todoNavigator.resetFilters",
+        "title": "TODO Navigator: Сбросить фильтры"
+      },
+      {
+        "command": "todoNavigator.openTask",
+        "title": "TODO Navigator: Перейти к задаче"
+      }
+    ],
+    "menus": {
+      "view/title": [
+        {
+          "command": "todoNavigator.refresh",
+          "when": "view == todoNavigator.tasks",
+          "group": "navigation@1"
+        },
+        {
+          "command": "todoNavigator.filterType",
+          "when": "view == todoNavigator.tasks",
+          "group": "navigation@2"
+        },
+        {
+          "command": "todoNavigator.filterPriority",
+          "when": "view == todoNavigator.tasks",
+          "group": "navigation@3"
+        }
+      ]
+    }
+  },
+  "scripts": {
+    "test": "node --test test/*.test.js",
+    "check": "node --check src/parser.js && node --check src/scanner.js && node --check src/tree.js && node --check src/extension.js && npm test",
+    "package": "vsce package --no-dependencies"
+  },
+  "license": "UNLICENSED"
+}
